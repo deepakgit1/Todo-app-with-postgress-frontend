@@ -19,7 +19,7 @@ const EditModal = ({ handleClose, show, editTask, editTitle, editId, getData }: 
     const updatetodos = async () => {
         handleClose()
         //update
-        const data = { title: newTask, task: newTitle }
+        const data = { title:newTitle , task:newTask  }
         console.log(data);
         await fetch(`http://localhost:4000/todos/${editId}`, {
             method: "PATCH",
