@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
@@ -37,14 +37,22 @@ const Login: FC = (props: Props) => {
                         hideProgressBar: false,
                         closeOnClick: true,
                         progress: undefined,
-                    });
+                    });                 
                 }
 
             })
         })
-
     }
-
+    
+      //Login Validation
+      const validUser = localStorage.getItem("token")
+      useEffect(() => {
+          if (validUser) {
+              navigate("/")
+          }else{
+              navigate("/login")
+          }
+      }, [validUser])
 
     return (
         <div>

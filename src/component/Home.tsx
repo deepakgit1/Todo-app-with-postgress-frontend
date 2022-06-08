@@ -33,7 +33,9 @@ const Home = (props: Props) => {
     const validUser = localStorage.getItem("token")
     useEffect(() => {
         getData()
-        if (!validUser) {
+        if (validUser) {
+            navigate("/")
+        }else{
             navigate("/login")
         }
     }, [validUser])
