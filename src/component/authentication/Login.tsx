@@ -26,7 +26,7 @@ const Login: FC = (props: Props) => {
             body: JSON.stringify(data)
         }).then((res) => {
             res.json().then((data) => {
-                console.log(data);
+                console.log("login data",data);
                 if (data.token) {
                     localStorage.setItem("token", data.token)
                     navigate("/")
