@@ -1,0 +1,36 @@
+.modal_body{
+    border-radius: 20px;
+    padding: 50px;
+    background-color: aqua;
+}
+    
+
+.modal_header {
+    background-color: mediumorchid;
+    color: white;
+    font-family: cursive;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.modal_footer{
+    border-radius: 20px;
+    background-color: mediumorchid;
+    color: white;
+    font-family: cursive;
+}
+
+.footer_button{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;  transform: translateY(-2px);
+
+}
+
+.footer_button:hover {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+}
+
+.footer_button:active {
+  box-shadow: none;
+  transform: translateY(0);
+}

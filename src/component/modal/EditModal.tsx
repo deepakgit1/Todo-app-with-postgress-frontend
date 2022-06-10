@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import Modal from "react-bootstrap/Modal"
+import "./modal.css"
 
 type Props = {
     show: boolean,
@@ -13,13 +14,17 @@ type Props = {
 
 const EditModal = ({ handleClose, show, editTask, editTitle, editId, getData }: Props) => {
 
-    const [newTitle, setNewTitle] = useState<string>("")
-    const [newTask, setNewTask] = useState<string>("")
-
+    const [newTitle, setNewTitle] = useState<string>(editTitle)
+    const [newTask, setNewTask] = useState<string>(editTask)
+    console.log(newTitle, newTask);
+    useEffect(() => {
+        setNewTitle(editTitle)
+        setNewTask(editTask)
+    }, [])
     const updatetodos = async () => {
-        handleClose()
+
         //update
-        const data = { title:newTitle , task:newTask  }
+        const data = { title: newTitle, task: newTask }
         console.log(data);
         await fetch(`http://localhost:4000/todos/${editId}`, {
             method: "PATCH",
@@ -32,6 +37,7 @@ const EditModal = ({ handleClose, show, editTask, editTitle, editId, getData }: 
             res.json().then((result) => {
                 console.log(result);
                 getData()
+                handleClose()
             })
         })
     }
@@ -40,13 +46,14 @@ const EditModal = ({ handleClose, show, editTask, editTitle, editId, getData }: 
     return (
         <>
             <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
+                <Modal.Header className='modal_header'>
                     <Modal.Title>Update Todo</Modal.Title>
+                    <Button type="button" className="btn-close bg-light" onClick={handleClose}></Button>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Label>New title</Form.Label>
+                    <Form className='modal_form' style={{fontFamily:"cursive"}}>
+                        <Form.Group  className="mb-3" controlId="exampleForm.ControlInput1">
+                            <Form.Label>Edit title</Form.Label>
                             <Form.Control
                                 type="text"
                                 placeholder="Enter New title"
@@ -59,16 +66,13 @@ const EditModal = ({ handleClose, show, editTask, editTitle, editId, getData }: 
                             className="mb-3"
                             controlId="exampleForm.ControlTextarea1"
                         >
-                            <Form.Label>New Task</Form.Label>
+                            <Form.Label>Edit Task</Form.Label>
                             <Form.Control as="textarea" rows={3} defaultValue={editTask} onChange={(e) => setNewTask(e.target.value)} />
                         </Form.Group>
                     </Form>
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={() => updatetodos()}>
+                <Modal.Footer className='modal_footer'>
+                    <Button className='footer_button m-auto' style={{background: "mediumslateblue"}} size='lg' onClick={() => updatetodos()}>
                         Save Changes
                     </Button>
                 </Modal.Footer>

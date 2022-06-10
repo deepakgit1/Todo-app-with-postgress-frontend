@@ -29,6 +29,7 @@ const Login: FC = (props: Props) => {
                 console.log("login data",data);
                 if (data.token) {
                     localStorage.setItem("token", data.token)
+                    localStorage.setItem("name", data.name)
                     navigate("/")
                 } else {
                     toast.error('Invalid Credentials!', {

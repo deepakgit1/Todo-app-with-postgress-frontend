@@ -42,7 +42,7 @@ const Home = (props: Props) => {
 
 
     return (
-        <div>
+        <div style={{background:"center",fontFamily:"cursive"}}>
             <Header />
             <Container className='mt-5'>
                 <Row>

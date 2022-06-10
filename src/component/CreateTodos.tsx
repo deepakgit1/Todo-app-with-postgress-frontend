@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Alert, Button, Form } from 'react-bootstrap'
+import { Alert, Button, Container, Form } from 'react-bootstrap'
 import { Todo } from '../models/todoModel'
 
 type Props = {
@@ -12,22 +12,22 @@ function CreateTodos({ setTodos }: Props) {
     const [title, setTitle] = useState<string>("")
     const [task, setTask] = useState<string>("")
 
-    const getData = ()=>{
-        let token = {token: localStorage.getItem("token")} 
-        fetch("http://localhost:4000/todos/get/all",{
-            method:"POST",
-            headers:{
+    const getData = () => {
+        let token = { token: localStorage.getItem("token") }
+        fetch("http://localhost:4000/todos/get/all", {
+            method: "POST",
+            headers: {
                 "Accept": "application/json",
-                "Content-type":"application/json"
+                "Content-type": "application/json"
             },
             body: JSON.stringify(token)
-        }).then((res)=>{
-            res.json().then((data)=>{
+        }).then((res) => {
+            res.json().then((data) => {
                 console.log(data);
                 setTodos(data)
             })
         })
-      }
+    }
 
 
 
@@ -59,17 +59,20 @@ function CreateTodos({ setTodos }: Props) {
             {
                 error ? <Alert variant='danger'>{error}</Alert> : ""
             }
-            <Form action="" className='mt-3 mb-3' onSubmit={(e) => addData(e)}>
-                <Form.Group className='mb-3' controlId='formBasicTitle'>
-                    <Form.Label className='h3'>Title</Form.Label>
-                    <Form.Control className='border border-info' type='text' placeholder='Enter title for the todos' value={title} onChange={(e) => setTitle(e.target.value)} />
-                </Form.Group>
-                <Form.Group className='mb-3' controlId='formBasicText'>
-                    <Form.Label className='h3'>Text</Form.Label>
-                    <Form.Control className='border border-info' type='text' placeholder='Enter your todos' as={"textarea"} value={task} onChange={(e) => setTask(e.target.value)} />
-                </Form.Group>
-                <Button type='submit' variant="primary">Submit</Button>
-            </Form>
+            <Container className='w-50 text-light'>
+                <Form action="" className='mt-3 mb-3' onSubmit={(e) => addData(e)}>
+                    <Form.Group className='mb-3' controlId='formBasicTitle'>
+                        <Form.Label className='h3'>Title</Form.Label>
+                        <Form.Control className='border border-info' type='text' placeholder='Enter title for the todos' value={title} onChange={(e) => setTitle(e.target.value)} />
+                    </Form.Group>
+                    <Form.Group className='mb-3' controlId='formBasicText'>
+                        <Form.Label className='h3'>Text</Form.Label>
+                        <Form.Control className='border border-info' type='text' placeholder='Enter your todos' as={"textarea"} value={task} onChange={(e) => setTask(e.target.value)} />
+                    </Form.Group>
+                    <Button type='submit' variant="success">Submit</Button>
+                </Form>
+                <h2 className='mt-3' style={{ color: "azure" }}>Your todos</h2>
+            </Container>
         </div>
     )
 }
