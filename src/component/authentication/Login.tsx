@@ -26,7 +26,7 @@ const Login: FC = (props: Props) => {
             body: JSON.stringify(data)
         }).then((res) => {
             res.json().then((data) => {
-                console.log("login data",data);
+                console.log("login data", data);
                 if (data.token) {
                     localStorage.setItem("token", data.token)
                     localStorage.setItem("name", data.name)
@@ -38,22 +38,22 @@ const Login: FC = (props: Props) => {
                         hideProgressBar: false,
                         closeOnClick: true,
                         progress: undefined,
-                    });                 
+                    });
                 }
 
             })
         })
     }
-    
-      //Login Validation
-      const validUser = localStorage.getItem("token")
-      useEffect(() => {
-          if (validUser) {
-              navigate("/")
-          }else{
-              navigate("/login")
-          }
-      }, [validUser])
+
+    //Login Validation
+    const validUser = localStorage.getItem("token")
+    useEffect(() => {
+        if (validUser) {
+            navigate("/")
+        } else {
+            navigate("/login")
+        }
+    }, [validUser])
 
     return (
         <div>

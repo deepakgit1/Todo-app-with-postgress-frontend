@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Alert, Button, Container, Form } from 'react-bootstrap'
 import { Todo } from '../models/todoModel'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 type Props = {
     todos: Todo[],
@@ -48,6 +50,14 @@ function CreateTodos({ setTodos }: Props) {
         }).then((res) => {
             res.json().then((data) => {
                 getData()
+
+                toast.success('Todo added 😀', {
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    progress: undefined,
+                });
                 setTitle("")
                 setTask("")
             })
@@ -56,10 +66,13 @@ function CreateTodos({ setTodos }: Props) {
 
     return (
         <div>
-            {
-                error ? <Alert variant='danger'>{error}</Alert> : ""
-            }
             <Container className='w-50 text-light'>
+                <div style={{ marginTop: "30px", justifyContent: "center", display: "flex" }}>
+                    <span style={{ fontSize: "2rem", fontFamily: "cursive" }}>Create Todo</span>
+                </div>
+                {
+                    error ? <Alert variant='danger'>{error}</Alert> : ""
+                }
                 <Form action="" className='mt-3 mb-3' onSubmit={(e) => addData(e)}>
                     <Form.Group className='mb-3' controlId='formBasicTitle'>
                         <Form.Label className='h3'>Title</Form.Label>
@@ -69,10 +82,10 @@ function CreateTodos({ setTodos }: Props) {
                         <Form.Label className='h3'>Text</Form.Label>
                         <Form.Control className='border border-info' type='text' placeholder='Enter your todos' as={"textarea"} value={task} onChange={(e) => setTask(e.target.value)} />
                     </Form.Group>
-                    <Button type='submit' variant="success">Submit</Button>
+                    <Button type='submit' variant="success">Submit Todo</Button>
                 </Form>
-                <h2 className='mt-3' style={{ color: "azure" }}>Your todos</h2>
             </Container>
+            <ToastContainer />
         </div>
     )
 }

@@ -17,13 +17,10 @@ const EditModal = ({ handleClose, show, editTask, editTitle, editId, getData }: 
     const [newTitle, setNewTitle] = useState<string>(editTitle)
     const [newTask, setNewTask] = useState<string>(editTask)
     console.log(newTitle, newTask);
-    useEffect(() => {
-        setNewTitle(editTitle)
-        setNewTask(editTask)
-    }, [])
-    const updatetodos = async () => {
 
+    const updatetodos = async () => {
         //update
+
         const data = { title: newTitle, task: newTask }
         console.log(data);
         await fetch(`http://localhost:4000/todos/${editId}`, {
@@ -42,6 +39,11 @@ const EditModal = ({ handleClose, show, editTask, editTitle, editId, getData }: 
         })
     }
 
+    useEffect(() => {
+        setNewTitle(editTitle)
+        setNewTask(editTask)
+    }, [editId])
+
 
     return (
         <>
@@ -51,8 +53,8 @@ const EditModal = ({ handleClose, show, editTask, editTitle, editId, getData }: 
                     <Button type="button" className="btn-close bg-light" onClick={handleClose}></Button>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form className='modal_form' style={{fontFamily:"cursive"}}>
-                        <Form.Group  className="mb-3" controlId="exampleForm.ControlInput1">
+                    <Form className='modal_form' style={{ fontFamily: "cursive" }}>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Edit title</Form.Label>
                             <Form.Control
                                 type="text"
@@ -72,7 +74,7 @@ const EditModal = ({ handleClose, show, editTask, editTitle, editId, getData }: 
                     </Form>
                 </Modal.Body>
                 <Modal.Footer className='modal_footer'>
-                    <Button className='footer_button m-auto' style={{background: "mediumslateblue"}} size='lg' onClick={() => updatetodos()}>
+                    <Button className='footer_button m-auto' style={{ background: "mediumslateblue" }} size='lg' onClick={() => updatetodos()}>
                         Save Changes
                     </Button>
                 </Modal.Footer>

@@ -1,5 +1,5 @@
-export interface Todo{
-    id:string,
-    title:string,
-    task:string,
-  }
+export interface Todo {
+  id: string,
+  title: string,
+  task: string,
+}

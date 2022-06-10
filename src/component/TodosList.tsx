@@ -1,6 +1,6 @@
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import React, { useState } from 'react'
-import { Button, Card, Col, Container, Row } from 'react-bootstrap'
+import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap'
 import { Todo } from '../models/todoModel'
 import EditModal from './modal/EditModal'
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
@@ -17,6 +17,30 @@ const TodosList: React.FC<Props> = ({ todos, setTodos, getData }) => {
   const [editTitle, setEditTitle] = useState<string>("")
   const [editTask, setEditTask] = useState<string>("")
   const [editid, setEditId] = useState<string>("")
+
+
+  //Search
+  //search
+  const [name, setName] = useState('');
+  const [foundUsers, setFoundUsers] = useState<Todo[]>(todos);
+
+  const filter = (e: React.ChangeEvent<any>) => {
+    const keyword = e.target.value;
+
+    if (keyword) {
+      const results = todos.filter((user) => {
+        return user.title.toLowerCase().startsWith(keyword.toLowerCase());
+        // Use the toLowerCase() method to make it case-insensitive
+      });
+      setFoundUsers(results);
+    } else {
+      setFoundUsers([]);
+      // If the text field is empty, show all users
+    }
+
+    setName(keyword);
+  };
+
 
   const handleDelete = (id: string) => {
     fetch(`http://localhost:4000/todos/${id}`, {
@@ -42,19 +66,46 @@ const TodosList: React.FC<Props> = ({ todos, setTodos, getData }) => {
   return (
     <>
       <Container className='w-75'>
+
+        {/* Search */}
+        <Form.Group className='mb-4' controlId='formBasicTitle' style={{ textAlign: "center" }}>
+          <Form.Label className='h4 text-light'>Search Your Todos</Form.Label>
+          <Form.Control className='border border-info w-50 m-auto' type='search' value={name}
+            placeholder='Enter title for the todos' onChange={(e) => filter(e)} style={{ borderRadius: "10px" }} />
+        </Form.Group>
         <Row xs={1} md={2} className="g-4">
+          {foundUsers && foundUsers.length > 0 ? (
+            foundUsers.map((user, k) => (
+              <div className='mb-3' key={k}>
+                <Col>
+                  <Card className='card_body' style={{ borderRadius: "10px" }}>
+                    <Card.Body>
+                      <Card.Title className='titlecard'>{user.title}</Card.Title>
+                      <Card.Text>{user.task}</Card.Text>
+                      <Button className='m-1' variant='danger' onClick={() => handleDelete(user.id)}><DeleteRoundedIcon /></Button>
+                      <Button className='m-1' variant='primary' onClick={() => handleShow(user.id, user.title, user.task)}><EditTwoToneIcon /></Button>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              </div>
+            ))
+          ) : (
+            ""
+          )}
+        </Row>
+        <h2 className='mt-4' style={{ color: "azure" }}>All Todos</h2>
+        {/* TodoList */}
+        <Row xs={1} md={2} className="g-4 mt-2">
           {todos.length > 0 ?
             todos.map((todo, k) => (
               <div className='mb-3' key={k}>
-
                 <Col>
-                  <Card>
+                  <Card className='card_body' style={{ borderRadius: "10px" }}>
                     <Card.Body>
-                      <Card.Title>{todo.title}</Card.Title>
+                      <Card.Title className='titlecard'>{todo.title}</Card.Title>
                       <Card.Text>{todo.task}</Card.Text>
-                      <Button className='m-1' variant='danger' onClick={() => handleDelete(todo.id)}><DeleteRoundedIcon /></Button>
-                      <Button className='m-1' variant='primary' onClick={() => handleShow(todo.id, todo.title, todo.task)}><EditTwoToneIcon /></Button>
-
+                      <Button className='m-1' variant='danger' size='sm' onClick={() => handleDelete(todo.id)}><DeleteRoundedIcon /></Button>
+                      <Button className='m-1' variant='primary' size='sm' onClick={() => handleShow(todo.id, todo.title, todo.task)}><EditTwoToneIcon /></Button>
                     </Card.Body>
                   </Card>
                 </Col>
