@@ -54,3 +54,7 @@ s.App {
 .card_body:nth-child(1) {
   background-color: #61dafb;
 }
+
+.submit_button{
+  background-color: red;
+}

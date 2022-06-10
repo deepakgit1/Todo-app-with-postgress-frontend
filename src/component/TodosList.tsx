@@ -4,6 +4,8 @@ import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap'
 import { Todo } from '../models/todoModel'
 import EditModal from './modal/EditModal'
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "../App.css"
 
 type Props = {
@@ -48,6 +50,13 @@ const TodosList: React.FC<Props> = ({ todos, setTodos, getData }) => {
     }).then((res) => {
       res.json().then((data) => {
         console.log(data);
+        toast.error('Todo Deleted 😐', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          progress: undefined,
+        });
 
         getData()
       })
@@ -102,7 +111,8 @@ const TodosList: React.FC<Props> = ({ todos, setTodos, getData }) => {
                 <Col>
                   <Card className='card_body' style={{ borderRadius: "10px" }}>
                     <Card.Body>
-                      <Card.Title className='titlecard'>{todo.title}</Card.Title>
+                      <Card.Title className='titlecard'><p>{todo.title}</p>
+                        <p style={{ fontSize: "15px" }}>Created at: <span style={{ color: "blue", fontSize: "15px" }}>{todo.time}</span></p></Card.Title>
                       <Card.Text>{todo.task}</Card.Text>
                       <Button className='m-1' variant='danger' size='sm' onClick={() => handleDelete(todo.id)}><DeleteRoundedIcon /></Button>
                       <Button className='m-1' variant='primary' size='sm' onClick={() => handleShow(todo.id, todo.title, todo.task)}><EditTwoToneIcon /></Button>
@@ -122,6 +132,7 @@ const TodosList: React.FC<Props> = ({ todos, setTodos, getData }) => {
         </Row>
       </Container>
       <div><EditModal handleClose={handleClose} show={show} editTitle={editTitle} editTask={editTask} editId={editid} getData={getData} /></div>
+      <ToastContainer />
     </>
   )
 }

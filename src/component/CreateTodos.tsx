@@ -3,6 +3,7 @@ import { Alert, Button, Container, Form } from 'react-bootstrap'
 import { Todo } from '../models/todoModel'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import "../App.css"
 
 type Props = {
     todos: Todo[],
@@ -82,7 +83,7 @@ function CreateTodos({ setTodos }: Props) {
                         <Form.Label className='h3'>Text</Form.Label>
                         <Form.Control className='border border-info' type='text' placeholder='Enter your todos' as={"textarea"} value={task} onChange={(e) => setTask(e.target.value)} />
                     </Form.Group>
-                    <Button type='submit' variant="success">Submit Todo</Button>
+                    <Button className='submit_button' type='submit'>Submit Todo</Button>
                 </Form>
             </Container>
             <ToastContainer />
