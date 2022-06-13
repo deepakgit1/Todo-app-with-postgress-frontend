@@ -45,7 +45,7 @@ const TodosList: React.FC<Props> = ({ todos, setTodos, getData }) => {
 
 
   const handleDelete = (id: string) => {
-    fetch(`http://localhost:4000/todos/${id}`, {
+    fetch(`https://todo-app-backend-server.herokuapp.com/todos/${id}`, {
       method: "DELETE",
     }).then((res) => {
       res.json().then((data) => {

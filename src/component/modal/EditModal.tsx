@@ -23,7 +23,7 @@ const EditModal = ({ handleClose, show, editTask, editTitle, editId, getData }: 
 
         const data = { title: newTitle, task: newTask }
         console.log(data);
-        await fetch(`http://localhost:4000/todos/${editId}`, {
+        await fetch(`https://todo-app-backend-server.herokuapp.com/todos/${editId}`, {
             method: "PATCH",
             headers: {
                 "Accept": "application/json",

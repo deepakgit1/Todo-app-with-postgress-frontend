@@ -14,7 +14,7 @@ const Home = (props: Props) => {
 
     const getData = ()=>{
         let token = {token: localStorage.getItem("token")} 
-        fetch("http://localhost:4000/todos/get/all",{
+        fetch("https://todo-app-backend-server.herokuapp.com/todos/get/all",{
             method:"POST",
             headers:{
                 "Accept": "application/json",

@@ -17,7 +17,7 @@ function CreateTodos({ setTodos }: Props) {
 
     const getData = () => {
         let token = { token: localStorage.getItem("token") }
-        fetch("http://localhost:4000/todos/get/all", {
+        fetch("https://todo-app-backend-server.herokuapp.com/todos/get/all", {
             method: "POST",
             headers: {
                 "Accept": "application/json",
@@ -41,7 +41,7 @@ function CreateTodos({ setTodos }: Props) {
         }
         const token = localStorage.getItem("token")
         const data = { title, task, token }
-        fetch("http://localhost:4000/todos/create", {
+        fetch("https://todo-app-backend-server.herokuapp.com/todos/create", {
             method: "POST",
             headers: {
                 "Accept": "application/json",

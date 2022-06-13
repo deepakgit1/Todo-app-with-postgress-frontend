@@ -17,7 +17,7 @@ const Login: FC = (props: Props) => {
     const handleSubmit = async () => {
         const data = { email, password }
         console.log(email, password);
-        await fetch("http://localhost:4000/login", {
+        await fetch("https://todo-app-backend-server.herokuapp.com/login", {
             method: "POST",
             headers: {
                 "Accept": "application/json",

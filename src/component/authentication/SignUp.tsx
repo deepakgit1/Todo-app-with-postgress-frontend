@@ -27,7 +27,7 @@ const SignUp: FC = (props: Props) => {
             });
         } else {
             const data = { name, email, password }
-            await fetch("http://localhost:4000/register", {
+            await fetch("https://todo-app-backend-server.herokuapp.com/register", {
                 method: "POST",
                 headers: {
                     "Accept": "application/json",
