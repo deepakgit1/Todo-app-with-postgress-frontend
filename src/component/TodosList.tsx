@@ -89,8 +89,8 @@ const TodosList: React.FC<Props> = ({ todos, setTodos, getData }) => {
                 <Col>
                   <Card className='card_body' style={{ borderRadius: "10px" }}>
                     <Card.Body>
-                      <Card.Title className='titlecard'>{user.title}</Card.Title>
-                      <Card.Text>{user.task}</Card.Text>
+                    <Card.Title className='titlecard'><p>{user.title}</p>
+                        <p style={{ fontSize: "15px" }}>Created at: <span style={{ color: "mediumorchid", fontSize: "15px" }}>{user.time}</span></p></Card.Title>                      <Card.Text>{user.task}</Card.Text>
                       <Button className='m-1' variant='danger' onClick={() => handleDelete(user.id)}><DeleteRoundedIcon /></Button>
                       <Button className='m-1' variant='primary' onClick={() => handleShow(user.id, user.title, user.task)}><EditTwoToneIcon /></Button>
                     </Card.Body>
@@ -112,7 +112,7 @@ const TodosList: React.FC<Props> = ({ todos, setTodos, getData }) => {
                   <Card className='card_body' style={{ borderRadius: "10px" }}>
                     <Card.Body>
                       <Card.Title className='titlecard'><p>{todo.title}</p>
-                        <p style={{ fontSize: "15px" }}>Created at: <span style={{ color: "blue", fontSize: "15px" }}>{todo.time}</span></p></Card.Title>
+                        <p style={{ fontSize: "15px" }}>Created at: <span style={{ color: "mediumorchid", fontSize: "15px" }}>{todo.time}</span></p></Card.Title>
                       <Card.Text>{todo.task}</Card.Text>
                       <Button className='m-1' variant='danger' size='sm' onClick={() => handleDelete(todo.id)}><DeleteRoundedIcon /></Button>
                       <Button className='m-1' variant='primary' size='sm' onClick={() => handleShow(todo.id, todo.title, todo.task)}><EditTwoToneIcon /></Button>
